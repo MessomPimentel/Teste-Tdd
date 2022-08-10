@@ -1,12 +1,21 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
-class TestePilha {
+public class TestePilha {
+
+	private Pilha p;
+
+	@Before
+	public void inicializaPilha() {
+
+		p = new Pilha(10);
+
+	}
 
 	@Test
-	public void test() {
-		Pilha p = new Pilha();
+	public void pilhaVazia() {
 		assertTrue(p.estaVazia());
 		assertEquals(0, p.tamanho());
 
@@ -14,16 +23,14 @@ class TestePilha {
 
 	@Test
 	public void empilhaUmElemnto() {
-		Pilha p = new Pilha();
 		p.empilha("primeiro");
 		assertFalse(p.estaVazia());
 		assertEquals(1, p.tamanho());
 		assertEquals("primeiro", p.topo());
 	}
-	
+
 	@Test
 	public void empilhaEDesempilha() {
-		Pilha p = new Pilha();
 		p.empilha("primeiro");
 		p.empilha("segundo");
 		assertEquals(2, p.tamanho());
@@ -32,6 +39,29 @@ class TestePilha {
 		assertEquals(1, p.tamanho());
 		assertEquals("primeiro", p.topo());
 		assertEquals("segundo", desempilhado);
+	}
+
+	// É preciso no TDD incluir cenários em que a classe deve lançar
+
+	@Test(expected = PilhaVaziaException.class)
+	public void removeDaPilhaVazia() {
+		p.desempilha();
+
+	}
+
+	@Test
+	public void adicionaNaPilhaCheia() {
+		for (int i = 0; i < 10; i++) {
+			p.empilha("elemento" + i);
+		}
+
+		try {
+			p.empilha("boom");
+			fail();
+		} catch (PilhaCheiaException e) {
+
+		}
+
 	}
 
 }

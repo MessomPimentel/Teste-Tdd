@@ -7,6 +7,9 @@ Exemplo em Pilha*👀
 REFATORAÇÃO
 
 Alteração feita ao código de um software para torná-lo:
+
 *Mais fácil de compeender
+
 *Mais fácil de modificar
+
 *Sem alterar o seu comportamento observável
